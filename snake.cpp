@@ -1,4 +1,9 @@
 #include "snake.h"
+#include "TextureManager.h"
+#include "GameObject.h"
+
+GameObject* jerry;
+GameObject* Tom;
 
 Snake::Snake()
 {}
@@ -33,10 +38,9 @@ void Snake::init(const char *title, int x, int y, int width, int height, bool fu
         isRunning = true;
     }
 
-    else{
-        isRunning = false;
-    }
-}
+    jerry = new GameObject("jerry.png", renderer, 0, 0);
+    Tom = new GameObject("Tom.jpg", renderer, 50 , 50);
+};
 
 void Snake::handleEvents()
 {
@@ -54,13 +58,19 @@ void Snake::handleEvents()
 }
 
 void Snake::update()
-{}
+{
+    jerry->Update();
+    Tom->Update();
+}
 
 void Snake::render()
 {
     SDL_RenderClear(renderer);
     // this is where wwe would add stuff to render
+    jerry->Render();
+    Tom->Render();
     SDL_RenderPresent(renderer);
+
 }
 
 void Snake::clean()
