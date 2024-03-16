@@ -1,9 +1,14 @@
 #include "snake.h"
 #include "TextureManager.h"
 #include "GameObject.h"
+#include "Map.h"
 
 GameObject* jerry;
 GameObject* Tom;
+Map* map;
+
+
+SDL_Renderer *Snake::renderer = nullptr;
 
 Snake::Snake()
 {}
@@ -38,8 +43,9 @@ void Snake::init(const char *title, int x, int y, int width, int height, bool fu
         isRunning = true;
     }
 
-    jerry = new GameObject("jerry.png", renderer, 0, 0);
-    Tom = new GameObject("Tom.jpg", renderer, 50 , 50);
+    jerry = new GameObject("Tom.png", 0, 0);
+    Tom = new GameObject("Jerry.png", 100 , 100);
+    map = new Map();
 };
 
 void Snake::handleEvents()
@@ -61,12 +67,14 @@ void Snake::update()
 {
     jerry->Update();
     Tom->Update();
+    //map->LoadMap();
 }
 
 void Snake::render()
 {
     SDL_RenderClear(renderer);
     // this is where wwe would add stuff to render
+    map->DrawMap();
     jerry->Render();
     Tom->Render();
     SDL_RenderPresent(renderer);

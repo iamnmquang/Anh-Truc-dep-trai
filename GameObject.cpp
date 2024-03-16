@@ -1,10 +1,9 @@
 #include "GameObject.h"
 #include "TextureManager.h"
 
-GameObject::GameObject(const char* texturesheet, SDL_Renderer* ren, int xpos, int ypos)
+GameObject::GameObject(const char* texturesheet, int xpos, int ypos)
 {
-    renderer = ren;
-    objTexture = TextureManager::LoadTexture(texturesheet, ren);
+    objTexture = TextureManager::LoadTexture(texturesheet);
 
     x = xpos;
     y = ypos;
@@ -16,10 +15,10 @@ void GameObject::Update()
     x++;
     y++;
 
-    srcRect.h = 64;
-    srcRect.w = 64;
-    srcRect.x = 0;
-    srcRect.y = 0;
+    srcRect.h = 128;
+    srcRect.w = 128;
+    srcRect.x = 16;
+    srcRect.y = 16;
 
     desRect.x = x;
     desRect.y = y;
@@ -30,5 +29,5 @@ void GameObject::Update()
 
 void GameObject::Render()
 {
-    SDL_RenderCopy(renderer, objTexture, &srcRect, &desRect);
+    SDL_RenderCopy(Snake::renderer, objTexture, &srcRect, &desRect);
 }
