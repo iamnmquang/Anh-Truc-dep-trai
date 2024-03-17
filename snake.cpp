@@ -3,12 +3,17 @@
 #include "GameObject.h"
 #include "Map.h"
 
+#include "ECS.h"
+#include "Components.h"
+
 GameObject* jerry;
 GameObject* Tom;
 Map* map;
 
-
 SDL_Renderer *Snake::renderer = nullptr;
+
+Manager manager;
+auto &newPlayer(manager.addEntity());
 
 Snake::Snake()
 {}
@@ -46,6 +51,9 @@ void Snake::init(const char *title, int x, int y, int width, int height, bool fu
     jerry = new GameObject("Tom.png", 0, 0);
     Tom = new GameObject("Jerry.png", 100 , 100);
     map = new Map();
+
+    newPlayer.addComponent<PositionComponet>();
+
 };
 
 void Snake::handleEvents()
@@ -68,6 +76,8 @@ void Snake::update()
     jerry->Update();
     Tom->Update();
     //map->LoadMap();
+    manager.update();
+    std::cout << newPlayer.getComponent<PositionComponet>().x() << "," << newPlayer.getComponent<PositionComponet>().y() << std::endl;
 }
 
 void Snake::render()

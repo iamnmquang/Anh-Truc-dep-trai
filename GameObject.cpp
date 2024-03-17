@@ -15,10 +15,10 @@ void GameObject::Update()
     x++;
     y++;
 
-    srcRect.h = 128;
-    srcRect.w = 128;
-    srcRect.x = 16;
-    srcRect.y = 16;
+    srcRect.h = 32;
+    srcRect.w = 32;
+    srcRect.x = 0;
+    srcRect.y = 0;
 
     desRect.x = x;
     desRect.y = y;
