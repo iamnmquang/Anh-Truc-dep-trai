@@ -1,3 +1,4 @@
+
 #include "snake.h"
 
 class Map
@@ -17,5 +18,4 @@ private:
     SDL_Texture* water;
 
     int map[20][25];
-
 };

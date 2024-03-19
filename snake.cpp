@@ -1,19 +1,18 @@
 #include "snake.h"
 #include "TextureManager.h"
-#include "GameObject.h"
 #include "Map.h"
+#include "ECS/Components.h"
+#include "Vector2D.h"
+#include "Collision.h"
+//#include "GameObject.h"
 
-#include "ECS.h"
-#include "Components.h"
-
-GameObject* jerry;
-GameObject* Tom;
-Map* map;
-
-SDL_Renderer *Snake::renderer = nullptr;
-
+Map *map;
 Manager manager;
-auto &newPlayer(manager.addEntity());
+
+SDL_Event Snake::event;
+SDL_Renderer *Snake::renderer = nullptr;
+auto &player(manager.addEntity());
+auto &wall(manager.addEntity());
 
 Snake::Snake()
 {}
@@ -47,18 +46,22 @@ void Snake::init(const char *title, int x, int y, int width, int height, bool fu
 
         isRunning = true;
     }
-
-    jerry = new GameObject("Tom.png", 0, 0);
-    Tom = new GameObject("Jerry.png", 100 , 100);
+    
     map = new Map();
+    player.addComponent<TransformComponent>(2);
+    player.addComponent<SpriteComponent>("Ohno.png");
+    player.addComponent<KeyboardController>();
+    player.addComponent<ColliderComponent>("player");
 
-    newPlayer.addComponent<PositionComponet>();
+    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+    wall.addComponent<SpriteComponent>("dirt.png");
+    wall.addComponent<ColliderComponent>("wall");
 
 };
 
 void Snake::handleEvents()
 {
-    SDL_Event event;
+    
     SDL_PollEvent(&event);
     switch (event.type)
     {
@@ -73,11 +76,15 @@ void Snake::handleEvents()
 
 void Snake::update()
 {
-    jerry->Update();
-    Tom->Update();
-    //map->LoadMap();
     manager.update();
-    std::cout << newPlayer.getComponent<PositionComponet>().x() << "," << newPlayer.getComponent<PositionComponet>().y() << std::endl;
+    manager.refresh();
+
+    if(Collision::AABB(player.getComponent<ColliderComponent>().collider, wall.getComponent<ColliderComponent>().collider))
+    {
+        player.getComponent<TransformComponent>().scale = 1;
+        std::cout << "Wall hit!" << std::endl;
+    }
+    
 }
 
 void Snake::render()
@@ -85,8 +92,7 @@ void Snake::render()
     SDL_RenderClear(renderer);
     // this is where wwe would add stuff to render
     map->DrawMap();
-    jerry->Render();
-    Tom->Render();
+    manager.draw();
     SDL_RenderPresent(renderer);
 
 }
