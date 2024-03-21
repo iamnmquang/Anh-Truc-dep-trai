@@ -8,6 +8,7 @@
 
 class Component;
 class Entity;
+class Manager;
 
 using ComponentID = std::size_t;
 using Group = std::size_t;
@@ -75,7 +76,7 @@ public:
     void addGroup(Group mGroup);
     void delGroup(Group mGroup)
     {
-        return groupBitset[mGroup] = false;
+         groupBitset[mGroup] = false;
     }
 
     template <typename T> bool hasComponent() const
@@ -153,7 +154,7 @@ public:
 
     Entity &addEntity()
     {
-        Entity *e = new Entity();
+        Entity *e = new Entity(*this);
         std::unique_ptr<Entity> uPtr{e};
         entities.emplace_back(std::move(uPtr));
         return *e;
