@@ -24,6 +24,9 @@ public:
             entity->addComponent<TransformComponent>();
         }
         transform = &entity->getComponent<TransformComponent>();
+
+        Snake::colliders.push_back(this);
+
     }
 
     void update() override

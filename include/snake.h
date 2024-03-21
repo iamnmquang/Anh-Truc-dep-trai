@@ -5,6 +5,11 @@
 #include <stdio.h>
 #include <iostream>
 #include <cmath>
+#include <vector>
+
+class ColliderComponent;
+
+
 class Snake
 {
 public:
@@ -20,8 +25,10 @@ public:
 
     bool running() { return isRunning;}
 
+    static void AddTile(int id, int x, int y);
     static SDL_Event event;
     static SDL_Renderer* renderer;
+    static std::vector<ColliderComponent*> colliders;
 
 private:
     int cnt = 0;
