@@ -3,16 +3,30 @@
 #include "Components.h"
 #include "SDL2/SDL.h"
 #include "TextureManager.h"
+
 class SpriteComponent : public Component
 {
 private: 
     TransformComponent * transform;
     SDL_Texture * texture;
     SDL_Rect srcRect, desRect;
+
+    bool animated = false;
+    int frames = 0;
+    int speed = 100;
 public:
     SpriteComponent() = default;
     SpriteComponent(const char* path)
     {
+        setTex(path);
+
+    }
+
+    SpriteComponent(const char* path, int nFrames, int mSpeed)
+    {
+        animated = true;
+        frames = nFrames;
+        speed = mSpeed;
         setTex(path);
 
     }
@@ -37,6 +51,11 @@ public:
     }
     void update() override
     {
+        if(animated)
+        {
+            srcRect.x = srcRect.w * static_cast<int>((SDL_GetTicks()/speed) % frames);
+        }
+
         desRect.x = static_cast<int> (transform->position.x);
         desRect.y = static_cast<int> (transform->position.y);
         desRect.w = transform->width * transform->scale;

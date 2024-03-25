@@ -14,27 +14,30 @@ public:
     int width = 32;
     int scale = 1;
 
-    int speed = 5;
+    int speed = 8;
 
     TransformComponent()
     {
-        position.x = 0.0f;
-        position.y = 0.0f;
+        position.x = 100.0f;
+        position.y = 100.0f;
     }
 
     TransformComponent(int sc)
     {
-        position.Zero();
+        position.x = 100;
+        position.y = 100;
         scale = sc;
     }
 
     TransformComponent(float x, float y)
     {
-        position.Zero();
+        position.x = 100;
+        position.y = 100;
     }
 
      TransformComponent(float x, float y, int h, int w, int sc)
     {
+    
         position.x = x;
         position.y = y;
         height = h;

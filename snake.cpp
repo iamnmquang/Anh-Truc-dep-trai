@@ -30,7 +30,7 @@ Snake::Snake()
 Snake::~Snake()
 {}
 
-void Snake::init(const char *title, int x, int y, int width, int height, bool fullscreen)
+void Snake::init(const char *title, int x, int y,const int width,const int height, bool fullscreen)
 {
     int flags = 0;
     if(fullscreen)
@@ -60,17 +60,17 @@ void Snake::init(const char *title, int x, int y, int width, int height, bool fu
     
     map = new Map();
 
-       Map::LoadMap("Map.txt", 32, 32);
+    Map::LoadMap("Map.txt", 25, 20);
 
-    player.addComponent<TransformComponent>(4);
-    player.addComponent<SpriteComponent>("Ohno.png");
+    player.addComponent<TransformComponent>(2);
+    player.addComponent<SpriteComponent>("pk.png",2,1000);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
-    wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
-    wall.addComponent<SpriteComponent>("dirt.png");
-    wall.addComponent<ColliderComponent>("wall");
+     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+     wall.addComponent<SpriteComponent>("dirt.png");
+     wall.addComponent<ColliderComponent>("wall");
     wall.addGroup(groupMap);
 
 };

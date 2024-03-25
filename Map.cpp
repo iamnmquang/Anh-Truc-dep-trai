@@ -2,16 +2,11 @@
 #include "snake.h"
 #include <fstream>
 
-
 Map::Map()
-{
-
-}
+{}
 
 Map::~Map()
-{
-    
-}
+{}
 
 void Map::LoadMap(std::string path, int sizeX, int sizeY)
 {

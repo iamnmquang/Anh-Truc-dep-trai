@@ -17,8 +17,8 @@ void GameObject::Update()
 
     srcRect.h = 32;
     srcRect.w = 32;
-    srcRect.x = 0;
-    srcRect.y = 0;
+    srcRect.x = 10;
+    srcRect.y = 10;
 
     desRect.x = x;
     desRect.y = y;

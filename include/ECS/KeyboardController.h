@@ -18,16 +18,16 @@ public:
         {
             switch (Snake::event.key.keysym.sym)
             {
-            case SDLK_w:
+            case SDLK_UP:
                 tranform->velocity.y = -1;
                 break;
-            case SDLK_a:
+            case SDLK_LEFT:
                 tranform->velocity.x = -1;
                 break;
-            case SDLK_d:
+            case SDLK_RIGHT:
                 tranform->velocity.x = 1;
                 break;
-            case SDLK_s:
+            case SDLK_DOWN:
                 tranform->velocity.y = 1;
                 break;
             default:
@@ -39,16 +39,16 @@ public:
         {
             switch (Snake::event.key.keysym.sym)
             {
-            case SDLK_w:
+            case SDLK_UP:
                 tranform->velocity.y = 0;
                 break;
-            case SDLK_a:
+            case SDLK_LEFT:
                 tranform->velocity.x = 0;
                 break;
-            case SDLK_d:
+            case SDLK_RIGHT:
                 tranform->velocity.x = 0;
                 break;
-            case SDLK_s:
+            case SDLK_DOWN:
                 tranform->velocity.y = 0;
                 break;
             default:
