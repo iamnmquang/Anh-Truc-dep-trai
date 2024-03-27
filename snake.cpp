@@ -63,7 +63,7 @@ void Snake::init(const char *title, int x, int y,const int width,const int heigh
     Map::LoadMap("Map.txt", 25, 20);
 
     player.addComponent<TransformComponent>(2);
-    player.addComponent<SpriteComponent>("pk.png",2,1000);
+    player.addComponent<SpriteComponent>("sba.png",2,1000);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
