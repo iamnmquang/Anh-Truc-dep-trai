@@ -1,4 +1,4 @@
-#pragma once
+
 #include "SDL2/SDL.h"
 
 class ColliderComponent;
@@ -6,7 +6,7 @@ class ColliderComponent;
 class Collision
 {
 public:
-    static bool AABB(const SDL_Rect &recA, const SDL_Rect &recB);
-    static bool AABB(const ColliderComponent &colA, const ColliderComponent &colB);
-    static bool S(const SDL_Rect &player);
+    static bool AABB( SDL_Rect &recA,  SDL_Rect &recB);
+    static void AdjustPosition(SDL_Rect &movingRect,  SDL_Rect &obstacleRect);
+    static bool AABB( ColliderComponent &colA,  ColliderComponent &colB);
 };
