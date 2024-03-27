@@ -14,7 +14,7 @@ bool Collision::AABB(const SDL_Rect &recA, const SDL_Rect &recB)
     return false;
 }
 
-bool Collision::S(const SDL_Rect &player)
+bool Collision::AABB(const SDL_Rect &player)
 {
     return player.x >= 0 &&
            player.y >= 0 ;

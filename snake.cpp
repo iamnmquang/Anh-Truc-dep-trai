@@ -17,6 +17,8 @@ std::vector<ColliderComponent*> Snake::colliders;
 auto &player(manager.addEntity());
 auto &wall(manager.addEntity());
 
+Collision *x;
+
 enum groupLabels : std::size_t
 {
     groupMap,
@@ -68,9 +70,10 @@ void Snake::init(const char *title, int x, int y,const int width,const int heigh
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
-     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 20, 1);
+     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 80, 3);
      wall.addComponent<SpriteComponent>("dirt.png");
      wall.addComponent<ColliderComponent>("wall");
+    //wall.addComponent<Collision>(x);
     wall.addGroup(groupMap);
 
 };
