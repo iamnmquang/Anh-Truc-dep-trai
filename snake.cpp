@@ -4,7 +4,7 @@
 #include "ECS/Components.h"
 #include "Vector2D.h"
 #include "Collision.h"
-//#include "GameObject.h"
+#include "GameObject.h"
 
 Map *map;
 Manager manager;
@@ -62,13 +62,28 @@ void Snake::init(const char *title, int x, int y,const int width,const int heigh
 
     Map::LoadMap("Map.txt", 25, 20);
 
-    player.addComponent<TransformComponent>(2);
+    player.addComponent<TransformComponent>(1);
     player.addComponent<SpriteComponent>("sba.png",2,1000);
     player.addComponent<KeyboardController>();
     player.addComponent<ColliderComponent>("player");
     player.addGroup(groupPlayers);
 
-     wall.addComponent<TransformComponent>(300.0f, 300.0f, 300, 80, 3);
+     wall.addComponent<TransformComponent>(0.0f, 0.0f, 640, 32, 1);
+     wall.addComponent<SpriteComponent>("dirt.png");
+     wall.addComponent<ColliderComponent>("wall");
+    wall.addGroup(groupMap);
+
+     wall.addComponent<TransformComponent>(768.0f, 0.0f, 640, 32, 1);
+     wall.addComponent<SpriteComponent>("dirt.png");
+     wall.addComponent<ColliderComponent>("wall");
+    wall.addGroup(groupMap);
+
+    wall.addComponent<TransformComponent>(32.0f, 0.0f, 32, 736, 1);
+     wall.addComponent<SpriteComponent>("dirt.png");
+     wall.addComponent<ColliderComponent>("wall");
+    wall.addGroup(groupMap);
+
+    wall.addComponent<TransformComponent>(32.0f, 608.0f, 32, 736, 1);
      wall.addComponent<SpriteComponent>("dirt.png");
      wall.addComponent<ColliderComponent>("wall");
     wall.addGroup(groupMap);
@@ -95,16 +110,18 @@ void Snake::update()
     manager.update();
     manager.refresh();
 
-   for(auto& entity : colliders)
+for(auto& cc : colliders)
+{
+    // Kiểm tra va chạm giữa player và mỗi collider
+    if(Collision::AABB(player.getComponent<ColliderComponent>(), *cc))
     {
-        // Kiểm tra va chạm giữa player và mỗi collider
-        if(Collision::AABB(player.getComponent<ColliderComponent>(), *entity))
-        {
-            // Xử lý logic khi có va chạm
-            // Ví dụ: bạn có thể di chuyển player trở lại vị trí trước khi va chạm
-            // hoặc xử lý một cách khác tùy theo nhu cầu của trò chơi của bạn
-        }
+        // Xử lý logic khi có va chạm
+        
+        // Đặt lại vị trí của player bằng vị trí trước đó
+
+        // Dừng việc kiểm tra va chạm tiếp theo với các collider khác
     }
+}
     
 }
 

@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 
     snake = new Snake();
 
-    snake->init("SnakeScreen", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1024, 640, false);
+    snake->init("SnakeScreen", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 640, false);
 
     while(snake->running())
 

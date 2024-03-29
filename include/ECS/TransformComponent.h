@@ -53,7 +53,15 @@ public:
     void update() override
     {
         position.x += velocity.x * speed;
+        if(position.x < 0 )
+        {
+            position.x -= velocity.x * speed;
+        }
         position.y += velocity.y * speed;
+        if(position.y < 0 )
+        {
+            position.y -= velocity.y *speed;
+        }
     }
 
 };

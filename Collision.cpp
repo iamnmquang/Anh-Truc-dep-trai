@@ -1,6 +1,7 @@
 #include "Collision.h"
 #include "ECS/ColliderComponent.h"
 
+
 bool Collision::AABB( SDL_Rect &recA,  SDL_Rect &recB)
 {
     if (recA.x + recA.w >= recB.x && recB.x + recB.w >= recA.x &&
@@ -41,8 +42,7 @@ bool Collision::AABB( ColliderComponent &colA,  ColliderComponent &colB)
 {
     if (AABB(colA.collider, colB.collider))
     {
-        std::cout << colA.tag << " hit " << colB.tag << std::endl;
-
+         std::cout << colA.tag << " hit " << colB.tag << std::endl;
         // Sau khi phát hiện va chạm, điều chỉnh vị trí của colA.collider (nếu cần)
         AdjustPosition(colA.collider, colB.collider);
         return true;
